@@ -1,4 +1,4 @@
-package com.ispc.gestorstock;
+package com.ispc.gestorstock.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.VideoView;
 
+import com.ispc.gestorstock.R;
 import com.ispc.gestorstock.helpers.VideoHelper;
 
 public class MainActivity extends AppCompatActivity {
