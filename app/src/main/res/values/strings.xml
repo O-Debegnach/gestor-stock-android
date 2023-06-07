@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Gestor Stock</string>
+    <string name="home_title">Gestor de Stock</string>
+    <string name="home_subtitle">La mejor opcion para gestionar tu comercio</string>
+    <string name="home_login_button">Ingresar</string>
+    <string name="home_signup_button">Registrarse</string>
 </resources>
