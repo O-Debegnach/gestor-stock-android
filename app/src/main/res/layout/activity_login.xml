@@ -33,7 +33,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:src="@drawable/icon_user" />
+                android:src="@drawable/icon_email" />
 
             <EditText
                 android:id="@+id/editTextUserName"
@@ -42,7 +42,7 @@
                 android:layout_weight="1"
                 android:backgroundTint="@color/blue"
                 android:ems="10"
-                android:hint="@string/login_user_name_field"
+                android:hint="@string/login_email_field"
                 android:inputType="text"
                 android:textColor="@color/blue" />
 
