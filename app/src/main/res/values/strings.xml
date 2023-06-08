@@ -4,4 +4,8 @@
     <string name="home_subtitle">La mejor opcion para gestionar tu comercio</string>
     <string name="home_login_button">Ingresar</string>
     <string name="home_signup_button">Registrarse</string>
+    <string name="login_activity_label">Ingresar</string>
+    <string name="login_user_name_field">Nombre de usuario</string>
+    <string name="login_password_field">Contraseña</string>
+    <string name="login_button">Ingresar</string>
 </resources>

@@ -2,9 +2,11 @@ package com.ispc.gestorstock.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.VideoView;
 
 import com.ispc.gestorstock.R;
@@ -14,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String BANNER_VIDEO = "bgbanner";
 
     VideoView mBannerVideo;
+    Button mLoginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().hide();
         }
+
+        mLoginButton = findViewById(R.id.login_button);
+        mLoginButton.setOnClickListener(view -> {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        });
     }
 
     @Override
