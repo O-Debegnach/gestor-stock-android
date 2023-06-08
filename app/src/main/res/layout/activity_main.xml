@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="@string/home_title"
+                android:text="@string/main_screen_title"
                 android:textColor="@color/white"
                 android:textSize="38sp"
                 android:textStyle="bold" />
@@ -48,7 +48,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="@string/home_subtitle"
+                android:text="@string/main_screen_subtitle"
                 android:textColor="@color/beige"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -64,14 +64,15 @@
                 android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/home_login_button"
+                android:text="@string/main_screen_login_button"
                 android:layout_marginBottom="20dp"
                 android:padding="10dp"/>
 
             <Button
+                android:id="@+id/sign_up_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/home_signup_button"
+                android:text="@string/main_screen_signup_button"
                 android:padding="10dp"/>
         </LinearLayout>
     </LinearLayout>

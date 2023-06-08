@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">Gestor Stock</string>
-    <string name="home_title">Gestor de Stock</string>
-    <string name="home_subtitle">La mejor opcion para gestionar tu comercio</string>
-    <string name="home_login_button">Ingresar</string>
-    <string name="home_signup_button">Registrarse</string>
+    <string name="main_screen_title">Gestor de Stock</string>
+    <string name="main_screen_subtitle">La mejor opcion para gestionar tu comercio</string>
+    <string name="main_screen_login_button">Ingresar</string>
+    <string name="main_screen_signup_button">Registrarse</string>
     <string name="login_activity_label">Ingresar</string>
     <string name="login_email_field">Correo</string>
     <string name="login_password_field">Contraseña</string>
     <string name="login_button">Ingresar</string>
+    <string name="sign_up_activity_label">Registrarse</string>
+    <string name="sign_up_name_field">Nombre</string>
+    <string name="sign_up_password_field">Contraseña</string>
+    <string name="sign_up_email_field">Correo</string>
+    <string name="sign_up_confirm_password_field">Confirmar contraseña</string>
+    <string name="sign_up_button">Registrarse</string>
 </resources>

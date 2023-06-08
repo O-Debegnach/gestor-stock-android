@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     VideoView mBannerVideo;
     Button mLoginButton;
+    Button mSignUpButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +31,12 @@ public class MainActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.login_button);
         mLoginButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        });
+
+        mSignUpButton = findViewById(R.id.sign_up_button);
+        mSignUpButton.setOnClickListener(view -> {
+            Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         });
     }
