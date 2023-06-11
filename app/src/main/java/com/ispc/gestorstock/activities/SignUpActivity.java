@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.ispc.gestorstock.R;
 import com.ispc.gestorstock.helpers.StringHelpers;
@@ -77,7 +78,9 @@ public class SignUpActivity extends AppCompatActivity {
         mAuth.createUser(name, email, password).addOnCompleteListener(task -> {
             String message = task.isSuccessful() ? "Usuario creado correctamente" : "Ha ocurrido un error";
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-            finish();
+            if(task.isSuccessful()){
+                finish();
+            }
         });
     }
 }

@@ -7,10 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.Toast;
 import android.widget.VideoView;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.ispc.gestorstock.R;
 import com.ispc.gestorstock.helpers.VideoHelper;
+import com.ispc.gestorstock.providers.AuthProvider;
 
 public class MainActivity extends AppCompatActivity {
     private static final String BANNER_VIDEO = "bgbanner";
@@ -18,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     VideoView mBannerVideo;
     Button mLoginButton;
     Button mSignUpButton;
+    AuthProvider mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,12 +43,27 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, SignUpActivity.class);
             startActivity(intent);
         });
+
+        mAuth = new AuthProvider();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         initializeBannerVideoPlayer();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        Log.d("LOGIN", currentUser != null ? "User no null" : "User null");
+        if(currentUser != null){
+            Toast.makeText(MainActivity.this, "Usuario logueado", Toast.LENGTH_SHORT).show();
+            Log.d("LOGIN", currentUser.getEmail());
+            try {
+                Intent intent = new Intent(this, HomeActivity.class);
+                startActivity(intent);
+            } catch (Exception e){
+                Log.d("LOGIN", e.getMessage());
+            }
+        }
     }
 
     @Override

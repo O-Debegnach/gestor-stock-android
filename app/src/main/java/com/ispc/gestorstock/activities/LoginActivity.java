@@ -9,16 +9,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ispc.gestorstock.R;
+import com.ispc.gestorstock.providers.AuthProvider;
 
 public class LoginActivity extends AppCompatActivity {
 
     Button mLoginButton;
     EditText mEmailField;
     EditText mPasswordField;
+    AuthProvider mAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        mAuth = new AuthProvider();
 
         mLoginButton = findViewById(R.id.login_button);
         mLoginButton.setOnClickListener(view -> {
@@ -38,6 +42,10 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         Log.d("LOGIN", email + ":::::" + password);
+        mAuth.loginWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            Toast.makeText(this, "Login exitoso", Toast.LENGTH_SHORT).show();
+            finish();
+        });
     }
 
 }
