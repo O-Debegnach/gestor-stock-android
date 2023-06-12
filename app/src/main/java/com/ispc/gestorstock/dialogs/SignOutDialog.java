@@ -24,7 +24,7 @@ public class SignOutDialog extends DialogFragment {
         super.onCreateDialog(savedInstanceState);
 
         return new AlertDialog.Builder(getActivity())
-                .setIcon(R.drawable.icon_email)
+                .setIcon(R.drawable.icon_close_sesion)
                 .setTitle(R.string.dialog_signout_title)
                 .setPositiveButton(R.string.dialog_signout_positive_button,
                         (dialogInterface, i) -> ((HomeActivity)getActivity()).doPositiveClick())
