@@ -37,7 +37,7 @@
                 android:src="@drawable/icon_user" />
 
             <EditText
-                android:id="@+id/editTextUserName"
+                android:id="@+id/editTextName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -133,6 +133,7 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/sign_up_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"

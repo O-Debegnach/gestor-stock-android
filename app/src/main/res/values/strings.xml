@@ -14,4 +14,8 @@
     <string name="sign_up_email_field">Correo</string>
     <string name="sign_up_confirm_password_field">Confirmar contraseña</string>
     <string name="sign_up_button">Registrarse</string>
+    <string name="dialog_signout_title">¿Desea cerrar sesion?</string>
+    <string name="dialog_signout_positive_button">Cerrar sesion</string>
+    <string name="dialog_signout_negative_button">Cancelar</string>
+    <string name="home_activity_label">Dashboard</string>
 </resources>

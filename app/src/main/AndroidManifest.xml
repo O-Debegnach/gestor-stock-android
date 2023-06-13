@@ -12,10 +12,14 @@
         android:theme="@style/Theme.GestorStock"
         tools:targetApi="31">
         <activity
+            android:name=".activities.HomeActivity"
+            android:exported="false"
+            android:label="@string/home_activity_label" />
+        <activity
             android:name=".activities.SignUpActivity"
             android:exported="false"
             android:label="@string/sign_up_activity_label"
-            android:parentActivityName=".activities.MainActivity"/>
+            android:parentActivityName=".activities.MainActivity" />
         <activity
             android:name=".activities.LoginActivity"
             android:exported="false"
