@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/menu_item_sign_out"
+        android:icon="@drawable/icon_close_session_white"
+        android:title="Cerrar Sesion"
+        app:showAsAction="always" />
+</menu>

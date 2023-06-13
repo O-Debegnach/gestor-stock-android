@@ -1,5 +1,6 @@
 package com.ispc.gestorstock.activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -8,6 +9,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -51,40 +54,16 @@ public class HomeActivity extends AppCompatActivity {
         mDialog.show(getSupportFragmentManager(), "signout dialog");
     }
 
-    public void doPositiveClick(){
-        mAuth.logout();
-        finish();
-    }
-    public void doNegativeClick(){
-        mDialog.dismiss();
-    }
-
     public void loadProducts(){
         LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.activity_home, null);
 
         TableLayout table = (TableLayout) v.findViewById(R.id.table_products);
 
-        TableRow tbRow = new TableRow(this);
-        tbRow.setOrientation(LinearLayout.VERTICAL);
 
         for (Product p :
                 products) {
-            TableRow tr = new TableRow(this);
-            TextView tvName = new TextView(this);
-            tvName.setText(p.getName());
-            tr.addView(tvName);
-
-            TextView tvStock = new TextView(this);
-            tvStock.setText(String.valueOf(p.getStock()));
-            tvStock.setGravity(Gravity.CENTER);
-            tr.addView(tvStock);
-
-            TextView tvPrice = new TextView(this);
-            tvPrice.setText("$ " + String.valueOf(p.getPrice()));
-            tvPrice.setGravity(Gravity.END);
-            tr.addView(tvPrice);
-
+            TableRow tr = getTableRow(p);
             table.addView(tr);
         }
 
@@ -93,5 +72,63 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_home, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menu_item_sign_out) {
+            mDialog.show(getSupportFragmentManager(), "signout dialog");
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void doPositiveClick(){
+        mAuth.logout();
+        finish();
+    }
+
+    public void doNegativeClick(){
+        mDialog.dismiss();
+    }
+
+    public int dpToPixel(int dp){
+        float scale = getResources().getDisplayMetrics().density;
+        return (int) (dp*scale + 0.5f);
+    }
+
+    private TextView getTableCell(String content){
+        TextView textView = new TextView(this);
+        textView.setText(content);
+        textView.setPadding(dpToPixel(15), 0, dpToPixel(15), 0);
+
+        return textView;
+    }
+
+    private TextView getTableCell(int content){
+        return getTableCell(String.valueOf(content));
+    }
+
+    private TextView getTableCell(float content){
+        return getTableCell(String.valueOf(content));
+    }
+
+    private TableRow getTableRow(Product product){
+        TableRow tr = new TableRow(this);
+        TextView tvName = getTableCell(product.getName());
+        tr.addView(tvName);
+
+        TextView tvStock = getTableCell(product.getStock());
+        tvStock.setGravity(Gravity.CENTER);
+        tr.addView(tvStock);
+
+        TextView tvPrice = getTableCell("$ " + String.valueOf(product.getPrice()));
+        tvPrice.setGravity(Gravity.END);
+        tr.addView(tvPrice);
+
+        return tr;
+    }
 }
