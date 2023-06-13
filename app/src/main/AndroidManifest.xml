@@ -14,7 +14,7 @@
         <activity
             android:name=".activities.HomeActivity"
             android:exported="false"
-            android:label="@string/title_activity_home" />
+            android:label="@string/home_activity_label" />
         <activity
             android:name=".activities.SignUpActivity"
             android:exported="false"
