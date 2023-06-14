@@ -4,7 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -12,8 +13,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
+import android.widget.ImageButton;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -28,9 +28,16 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public static final String EDIT_PRODUCT_MESSAGE = "EDIT_PRODUCT";
+
+    TableRow selectedRow;
+    Product selectedProduct;
     SignOutDialog mDialog;
     AuthProvider mAuth;
     List<Product> products = new ArrayList<>();
+    ImageButton mAddProductButton;
+    ImageButton mEditProductButton;
+    ImageButton mDeleteProductButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,11 +48,26 @@ public class HomeActivity extends AppCompatActivity {
         mAuth = new AuthProvider();
 
         for (int i = 0; i < 300; i++){
-            products.add(new Product("1", "Test " + i, 10, 10));
+            products.add(new Product(String.valueOf(i), "Test " + i, 10, 10));
         }
         Log.d("HOME", products.toString());
         loadProducts();
 
+        mAddProductButton = findViewById(R.id.add_product_button);
+        mAddProductButton.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ProductFormActivity.class);
+            startActivity(intent);
+        });
+
+        mDeleteProductButton = findViewById(R.id.delete_product_button);
+
+        mEditProductButton = findViewById(R.id.edit_product_button);
+        mEditProductButton.setOnClickListener(view -> {
+            Intent intent = new Intent(this, ProductFormActivity.class);
+            intent.putExtra(EDIT_PRODUCT_MESSAGE, selectedProduct.getId());
+
+            startActivity(intent);
+        });
     }
 
     @Override
@@ -67,9 +89,7 @@ public class HomeActivity extends AppCompatActivity {
             table.addView(tr);
         }
 
-        // Display the view
         setContentView(v);
-
     }
 
     @Override
@@ -103,7 +123,7 @@ public class HomeActivity extends AppCompatActivity {
     private TextView getTableCell(String content){
         TextView textView = new TextView(this);
         textView.setText(content);
-        textView.setPadding(dpToPixel(15), 0, dpToPixel(15), 0);
+        textView.setPadding(dpToPixel(15), dpToPixel(5), dpToPixel(15), dpToPixel(5));
 
         return textView;
     }
@@ -129,6 +149,22 @@ public class HomeActivity extends AppCompatActivity {
         tvPrice.setGravity(Gravity.END);
         tr.addView(tvPrice);
 
+        tr.setOnClickListener(view -> {
+            Log.d("TABLE", "Item clickeado ::::::: " + product.getName());
+            selectProduct(tr, product);
+        });
+
         return tr;
+    }
+
+    private void selectProduct(TableRow tr, Product product){
+        if(selectedRow != null){
+            selectedRow.setBackground(null);
+        }
+        tr.setBackground(getDrawable(R.drawable.table_selected_row_background));
+        mDeleteProductButton.setVisibility(View.VISIBLE);
+        mEditProductButton.setVisibility(View.VISIBLE);
+        selectedRow = tr;
+        selectedProduct = product;
     }
 }

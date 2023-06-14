@@ -81,6 +81,17 @@
         android:layout_marginBottom="25dp">
 
         <ImageButton
+            android:id="@+id/edit_product_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/icon_edit"
+            android:layout_marginEnd="10dp"
+            android:visibility="invisible"
+            android:backgroundTint="@color/blue"
+            android:background="@drawable/circle_button"/>
+
+        <ImageButton
+            android:id="@+id/add_product_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_add"
@@ -88,19 +99,14 @@
             android:backgroundTint="@color/blue"
             android:background="@drawable/circle_button"/>
 
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/icon_edit"
-            android:layout_marginEnd="10dp"
-            android:backgroundTint="@color/blue"
-            android:background="@drawable/circle_button"/>
 
         <ImageButton
+            android:id="@+id/delete_product_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/icon_delete"
             android:backgroundTint="@color/blue"
+            android:visibility="invisible"
             android:background="@drawable/circle_button"/>
 
 
