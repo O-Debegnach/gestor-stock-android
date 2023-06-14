@@ -47,9 +47,11 @@ public class HomeActivity extends AppCompatActivity {
         mDialog = new SignOutDialog();
         mAuth = new AuthProvider();
 
-        for (int i = 0; i < 300; i++){
-            products.add(new Product(String.valueOf(i), "Test " + i, 10, 10));
-        }
+
+        
+//        for (int i = 0; i < 300; i++){
+//            products.add(new Product(String.valueOf(i), "Test " + i, 10, 10));
+//        }
         Log.d("HOME", products.toString());
         loadProducts();
 

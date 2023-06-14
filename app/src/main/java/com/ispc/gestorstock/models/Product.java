@@ -1,19 +1,23 @@
 package com.ispc.gestorstock.models;
 
 public class Product {
-    String id;
+    int id;
+    String userID;
     String name;
     float price;
     int stock;
 
-    public Product(String id, String name, float price, int stock) {
+    public Product(){}
+
+    public Product(int id, String userID, String name, float price, int stock) {
         this.id = id;
+        this.userID = userID;
         this.name = name;
         this.price = price;
         this.stock = stock;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -40,4 +44,14 @@ public class Product {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
 }
