@@ -88,4 +88,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return products;
     }
+
+    public void deleteProduct(int id){
+        if(mInstance == null) return;
+        var db = mInstance.getWritableDatabase();
+        String[] values = {String.valueOf(id)};
+        db.delete(DATABASE_TABLE, "id = ?", values);
+    }
 }

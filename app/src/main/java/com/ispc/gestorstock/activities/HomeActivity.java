@@ -69,6 +69,15 @@ public class HomeActivity extends AppCompatActivity {
 
             startActivity(intent);
         });
+
+        mDeleteProductButton.setOnClickListener(view -> {
+            deleteProductFromDataBase();
+        });
+    }
+
+    private void deleteProductFromDataBase() {
+        dbHelper.deleteProduct(selectedProduct.getId());
+        loadProducts();
     }
 
     @Override
