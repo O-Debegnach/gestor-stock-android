@@ -31,6 +31,7 @@ public class ProductFormActivity extends AppCompatActivity {
     AuthProvider mAuth;
 
     DatabaseHelper dbHelper;
+    Product product;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +47,6 @@ public class ProductFormActivity extends AppCompatActivity {
 
         mTitle = findViewById(R.id.product_form_title);
 
-        if(message != null && !message.isBlank()){
-            mTitle.setText(R.string.product_form_edit_product_title);
-            isEditing = true;
-        }
 
         mAcceptButton = findViewById(R.id.accept_button);
         mAcceptButton.setOnClickListener(view -> {
@@ -64,6 +61,18 @@ public class ProductFormActivity extends AppCompatActivity {
         mNameField = findViewById(R.id.editTextName);
         mStockField = findViewById(R.id.editTextStock);
         mPriceField = findViewById(R.id.editTextPrice);
+
+        if(message != null && !message.isBlank()){
+            mTitle.setText(R.string.product_form_edit_product_title);
+            isEditing = true;
+            product = dbHelper.getProductById(Integer.parseInt(message));
+            if(product != null){
+                mNameField.setText(product.getName());
+                mPriceField.setText(String.valueOf(product.getPrice()));
+                mStockField.setText(String.valueOf(product.getStock()));
+            }
+        }
+
     }
 
     private void onAcceptClick(){
@@ -72,13 +81,18 @@ public class ProductFormActivity extends AppCompatActivity {
         String price = mPriceField.getText().toString();
         String userID = mAuth.getUID();
 
-        Product product = new Product();
+        if(product == null) product = new Product();
         product.setName(name);
         product.setPrice(Float.parseFloat(price));
         product.setStock(Integer.parseInt(stock));
         product.setUserID(userID);
 
-        dbHelper.insertProduct(product);
+        if(isEditing){
+            dbHelper.updateProduct(product);
+        }
+        else {
+            dbHelper.insertProduct(product);
+        }
         NavUtils.navigateUpFromSameTask(this);
     }
 }

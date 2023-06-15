@@ -89,10 +89,52 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return products;
     }
 
+    public Product getProductById(int id){
+        if(mInstance == null) return null;
+
+        var db = mInstance.getWritableDatabase();
+        String[] selectionValues = {String.valueOf(id)};
+        Cursor cursor = db.query(
+                DATABASE_TABLE,
+                null,
+                "id = ?",
+                selectionValues,
+                null,
+                null,
+                "id ASC"
+        );
+
+        cursor.moveToFirst();
+        var _id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+        var _userID = cursor.getString(cursor.getColumnIndexOrThrow("userID"));
+        var _name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+        var _stock = cursor.getInt(cursor.getColumnIndexOrThrow("stock"));
+        var _price = cursor.getFloat(cursor.getColumnIndexOrThrow("price"));
+
+        cursor.close();
+
+        return new Product(_id, _userID, _name, _price, _stock);
+    }
+
     public void deleteProduct(int id){
         if(mInstance == null) return;
         var db = mInstance.getWritableDatabase();
         String[] values = {String.valueOf(id)};
         db.delete(DATABASE_TABLE, "id = ?", values);
+    }
+
+    public void updateProduct(Product product){
+        if(mInstance == null) return;
+        var db = mInstance.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("userID", product.getUserID());
+        values.put("name", product.getName());
+        values.put("stock", product.getStock());
+        values.put("price", product.getPrice());
+
+        String selection = "id = ?";
+        String[] selectionArgs = {String.valueOf(product.getId())};
+        db.update(DATABASE_TABLE, values, selection, selectionArgs);
     }
 }
