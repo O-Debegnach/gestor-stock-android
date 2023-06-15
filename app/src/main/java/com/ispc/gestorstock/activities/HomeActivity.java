@@ -3,6 +3,8 @@ package com.ispc.gestorstock.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import com.ispc.gestorstock.R;
 import com.ispc.gestorstock.dialogs.SignOutDialog;
+import com.ispc.gestorstock.helpers.DatabaseHelper;
 import com.ispc.gestorstock.models.Product;
 import com.ispc.gestorstock.providers.AuthProvider;
 
@@ -38,6 +41,7 @@ public class HomeActivity extends AppCompatActivity {
     ImageButton mAddProductButton;
     ImageButton mEditProductButton;
     ImageButton mDeleteProductButton;
+    DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,19 +50,14 @@ public class HomeActivity extends AppCompatActivity {
 
         mDialog = new SignOutDialog();
         mAuth = new AuthProvider();
-
-
-        
-//        for (int i = 0; i < 300; i++){
-//            products.add(new Product(String.valueOf(i), "Test " + i, 10, 10));
-//        }
-        Log.d("HOME", products.toString());
+        dbHelper = DatabaseHelper.getInstance(this);
         loadProducts();
 
         mAddProductButton = findViewById(R.id.add_product_button);
         mAddProductButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, ProductFormActivity.class);
             startActivity(intent);
+            Log.d("HOME", "ADD PRODUCT CLICKED");
         });
 
         mDeleteProductButton = findViewById(R.id.delete_product_button);
@@ -66,10 +65,18 @@ public class HomeActivity extends AppCompatActivity {
         mEditProductButton = findViewById(R.id.edit_product_button);
         mEditProductButton.setOnClickListener(view -> {
             Intent intent = new Intent(this, ProductFormActivity.class);
-            intent.putExtra(EDIT_PRODUCT_MESSAGE, selectedProduct.getId());
+            intent.putExtra(EDIT_PRODUCT_MESSAGE, String.valueOf(selectedProduct.getId()));
 
             startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        Log.d("HOME", "RESTART");
+        loadProducts();
+        Log.d("HOME", products.toString());
+        super.onRestart();
     }
 
     @Override
@@ -84,7 +91,7 @@ public class HomeActivity extends AppCompatActivity {
 
         TableLayout table = (TableLayout) v.findViewById(R.id.table_products);
 
-
+        products =  dbHelper.getProductsOfUser(mAuth.getUID());
         for (Product p :
                 products) {
             TableRow tr = getTableRow(p);
@@ -160,12 +167,22 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void selectProduct(TableRow tr, Product product){
+        Log.d("HOME", "TABLE SELECT PRODUCT");
         if(selectedRow != null){
             selectedRow.setBackground(null);
         }
         tr.setBackground(getDrawable(R.drawable.table_selected_row_background));
-        mDeleteProductButton.setVisibility(View.VISIBLE);
-        mEditProductButton.setVisibility(View.VISIBLE);
+
+        Activity act = (Activity)this;
+        act.runOnUiThread(new Runnable(){
+            @Override
+            public void run() {
+                mDeleteProductButton.setVisibility(View.VISIBLE);
+                mEditProductButton.setVisibility(View.VISIBLE);
+            } });
+
+        Log.d("HOME", "BUTTON VISIBILITY:::" + mEditProductButton.getVisibility());
+
         selectedRow = tr;
         selectedProduct = product;
     }

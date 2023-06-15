@@ -18,4 +18,11 @@
     <string name="dialog_signout_positive_button">Cerrar sesion</string>
     <string name="dialog_signout_negative_button">Cancelar</string>
     <string name="home_activity_label">Dashboard</string>
+    <string name="product_form_add_product_title">Añadir producto</string>
+    <string name="product_form_edit_product_title">Editar producto</string>
+    <string name="product_form_cancel_buton">Cancelar</string>
+    <string name="product_form_accept_button">Aceptar</string>
+    <string name="product_form_stock_field">Stock actual</string>
+    <string name="product_form_price_field">Precio</string>
+    <string name="product_form_name_field">Nombre</string>
 </resources>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.ispc.gestorstock.models.Product;
 
@@ -57,6 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<Product> getProductsOfUser(String userID){
         List<Product> products = new ArrayList<>();
         if(mInstance == null) return null;
+        Log.d("DB HELPER", "LOAD - userID::" + userID);
 
         var db = mInstance.getWritableDatabase();
         String[] selectionValues = {userID};
@@ -67,7 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 selectionValues,
                 null,
                 null,
-                "name DESC"
+                "name ASC"
         );
 
         while(cursor.moveToNext()){
@@ -80,6 +82,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Product p = new Product(_id, _userID, _name, _price, _stock);
             products.add(p);
         }
+
+        Log.d("DB HELPER", "LOAD - products::" + products.toString());
 
         cursor.close();
         return products;
